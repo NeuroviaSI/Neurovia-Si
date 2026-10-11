@@ -94,8 +94,7 @@ function selectNav(btn,name){document.querySelectorAll('.nav').forEach(b=>b.clas
 function sendPrompt() {
     const prompt = document.getElementById('prompt').value;
     document.getElementById('output').innerText = "Loading...";
-    
-    fetch('https://neurovia-si.onrender.com/api', {
+    fetch('https://neurovia-si.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: prompt })

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurovia AI</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#050313;--panel:#100822;--purple:#8425ff;--pink:#ec35ff;--text:#f7f2ff}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,textarea{font:inherit}
+button{cursor:pointer;color:white}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;padding:22px 15px;background:#080514;border-right:1px solid #352052;display:flex;flex-direction:column;gap:17px}
+.logo{font-size:23px;font-weight:bold;color:#e7caff}
+.tagline{font-size:11px;color:#aaa;margin-top:5px}
+.newchat,.upgradebtn{border:0;border-radius:13px;padding:14px;background:linear-gradient(100deg,#7225ff,#e52be9);box-shadow:0 0 20px #8b22ff44}
+.label{font-size:12px;color:#aaa;margin-top:12px}
+.nav{border:1px solid transparent;background:transparent;padding:12px;text-align:left;border-radius:10px;color:#ded4f9}
+.nav:hover,.nav.active{background:#32106b;border-color:#6322a0}
+.premium{margin-top:auto;border:1px solid #8425ff;border-radius:15px;padding:15px;text-align:center;background:linear-gradient(140deg,#19072e,#080514)}
+.main{flex:1;min-width:0;padding:24px}
+.top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pill{border:1px solid #6923a7;background:#100821;padding:10px 15px;border-radius:30px}
+.hero{text-align:center;padding:45px 0 24px}
+.orb{width:90px;height:90px;border-radius:50%;margin:0 auto 22px;background:radial-gradient(circle at 30% 25%,#ffb6ff,#b52aff 30%,#2600a5 65%,#050313);box-shadow:0 0 35px #a42cff;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px);box-shadow:0 0 55px #d52cff}}
+h1{font-size:clamp(27px,4vw,43px);margin:10px 0}
+h1 span{color:#dc49ff}
+.subtitle{color:#c7b9e9}
+.quick{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:24px 0}
+.quick button{border:1px solid #a72cff;border-radius:30px;background:#100821;padding:12px 20px}
+.chatbox{border:1px solid #8b22ff;border-radius:20px;padding:20px;background:linear-gradient(130deg,#17082d,#0c0620);box-shadow:0 0 20px #8222ff22}
+textarea{width:100%;height:75px;resize:vertical;background:transparent;border:0;outline:0;color:white;font-size:16px}
+.chattools{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.chattools button{border:0;background:transparent;padding:8px}
+.send{margin-left:auto!important;border-radius:50%!important;background:linear-gradient(120deg,#7825ff,#ed2aff)!important;width:48px;height:48px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.card{border:1px solid #392064;border-radius:16px;padding:20px;background:linear-gradient(140deg,#100820,#070513);min-height:185px}
+.icon{font-size:25px;color:#d85cff}
+.card p{font-size:13px;line-height:1.6;color:#c4b8df}
+.output{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:20px;color:#e9d9ff}
+.hidden{display:none}
+@media(max-width:760px){.sidebar{width:175px;padding:14px 9px}.main{padding:15px}.cards{grid-template-columns:1fr}.hero{padding-top:30px}.logo{font-size:18px}}
+@media(max-width:480px){.app{display:block}.sidebar{width:100%;min-height:auto}.premium{display:none}.main{padding:14px}.navwrap{display:flex;flex-wrap:wrap;gap:5px}.nav{padding:8px}.hero{padding-top:25px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div><div class="logo">◉ NEUROVIA <span style="color:#dc35ff">AI</span></div><div class="tagline">Think + Create + Build</div></div>
+<button class="newchat" onclick="newChat()">＋ New Chat</button>
+<div class="label">FEATURES</div>
+<div class="navwrap">
+<button class="nav active" onclick="selectNav(this,'Chat')">▤ Chat</button>
+<button class="nav" onclick="selectNav(this,'Archived')">▣ Archived</button>
+<button class="nav" onclick="selectNav(this,'Library')">◫ Library</button>
+</div>
+<hr style="width:100%;border-color:#241737">
+<div class="label">WORKSPACES</div>
+<div class="navwrap">
+<button class="nav" onclick="selectNav(this,'New Project')">⊞ New Project</button>
+<button class="nav" onclick="selectNav(this,'Image')">▧ Image</button>
+<button class="nav" onclick="selectNav(this,'Presentation')">▤ Presentation</button>
+<button class="nav" onclick="selectNav(this,'Files')">▱ Files</button>
+</div>
+<div class="premium"><div style="font-size:28px">♛</div><b>Upgrade to Premium</b><p class="tagline">Unlock advanced features and higher limits.</p><button class="upgradebtn" onclick="alert('Premium plans coming soon!')">Upgrade Now →</button></div>
+</aside>
+<main class="main">
+<div class="top"><button class="pill" onclick="alert('Neurovia AI v1.0')">🟢 Neurovia AI v1.0⌄</button><div><button class="pill" onclick="alert('Configuration coming soon')">⚙ Configuration</button> <button class="pill" onclick="exportChat()">⇧ Export</button></div></div>
+<section class="hero">
+<div class="orb"></div>
+<h1>Ready to Create <span>Something New?</span></h1>
+<p class="subtitle">Your AI companion for ideas, productivity and creativity.</p>
+<p class="subtitle">Chat　+　Create　+　Build　+　Explore</p>
+<div class="quick"><button onclick="setPrompt('Help me create an image of ')">▧ Create Image</button><button onclick="setPrompt('Help me brainstorm ideas for ')">♧ Brainstorm</button><button onclick="setPrompt('Make a plan for ')">▦ Make a Plan</button></div>
+</section>
+<section class="chatbox">
+<textarea id="prompt" placeholder="✦ Ask Neurovia AI anything..."></textarea>
+<div class="chattools"><button onclick="document.getElementById('file').click()">📎 Attach</button><input id="file" type="file" class="hidden" onchange="showFile(this)"><button onclick="alert('Settings coming soon')">☷ Settings</button><button onclick="alert('More options coming soon')">▦ Options</button><button class="send" onclick="sendPrompt()">➤</button></div>
+<div id="output" class="output"></div>
+</section>
+<section class="cards">
+<div class="card"><div class="icon">▧</div><h3>Image Generator</h3><p>Create high-quality image ideas from text.</p><button class="pill" onclick="setPrompt('Describe an image of ')">Create Image →</button></div>
+<div class="card"><div class="icon">▣</div><h3>AI Presentation</h3><p>Turn ideas into engaging presentation outlines.</p><button class="pill" onclick="setPrompt('Create a presentation outline about ')">Make Slides →</button></div>
+<div class="card"><div class="icon">&lt;/&gt;</div><h3>Dev Assistant</h3><p>Get help planning, writing and debugging code.</p><button class="pill" onclick="setPrompt('Help me write code for ')">Generate Code →</button></div>
+</section>
+</main>
+</div>
+<script>
+function setPrompt(text){let p=document.getElementById('prompt');p.value=text;p.focus()}
+function newChat(){document.getElementById('prompt').value='';document.getElementById('output').textContent='';document.getElementById('prompt').focus()}
+function selectNav(btn,name){document.querySelectorAll('.nav').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(name!=='Chat')document.getElementById('output').textContent=name+' section selected. More features can be added here.'}
+function sendPrompt(){let p=document.getElementById('prompt').value.trim();if(!p){alert('Pehle apna message likho!');return}document.getElementById('output').textContent='You: '+p+'\n\nNeurovia AI: This interface is ready! To generate real AI answers, connect a secure AI API through a backend.'}
+function exportChat(){let text=document.getElementById('output').textContent||'Neurovia AI workspace';let blob=new Blob([text],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='neurovia-chat.txt';a.click();URL.revokeObjectURL(a.href)}
+function showFile(input){if(input.files.length)document.getElementById('output').textContent='Selected file: '+input.files[0].name}
+</script>
+</body>
+</html>

@@ -91,7 +91,24 @@ textarea{width:100%;height:75px;resize:vertical;background:transparent;border:0;
 function setPrompt(text){let p=document.getElementById('prompt');p.value=text;p.focus()}
 function newChat(){document.getElementById('prompt').value='';document.getElementById('output').textContent='';document.getElementById('prompt').focus()}
 function selectNav(btn,name){document.querySelectorAll('.nav').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(name!=='Chat')document.getElementById('output').textContent=name+' section selected. More features can be added here.'}
-function sendPrompt(){let p=document.getElementById('prompt').value.trim();if(!p){alert('Pehle apna message likho!');return}document.getElementById('output').textContent='You: '+p+'\n\nNeurovia AI: This interface is ready! To generate real AI answers, connect a secure AI API through a backend.'}
+function sendPrompt() {
+    const prompt = document.getElementById('prompt').value;
+    document.getElementById('output').innerText = "Loading...";
+    
+    fetch('https://neurovia-si.onrender.com/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: prompt })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('output').innerText = data.reply || data.response || JSON.stringify(data);
+    })
+    .catch(error => {
+        document.getElementById('output').innerText = "Error: " + error.message;
+    });
+}
+  
 function exportChat(){let text=document.getElementById('output').textContent||'Neurovia AI workspace';let blob=new Blob([text],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='neurovia-chat.txt';a.click();URL.revokeObjectURL(a.href)}
 function showFile(input){if(input.files.length)document.getElementById('output').textContent='Selected file: '+input.files[0].name}
 </script>
